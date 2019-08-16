@@ -1,0 +1,156 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-card/paper-card.html">
+
+<dom-module id="loader-component">
+  <template>
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+      :host {
+        display: block;
+      }
+
+      .cont-type-loader {
+        display: flex;
+      }
+
+      paper-card {
+        width: 300px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin: 0 auto;
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 10px;
+      }
+
+      iron-icon {
+        height: 50px;
+        width: 50px;
+      }
+
+      #contIcons {
+        display: flex;
+        margin: 0 auto;
+      }
+
+      #spinner {
+        animation: spinner 1s infinite;
+        animation-delay: 1s;
+      }
+
+      #bounce{
+        animation: bounce 1s infinite;
+        animation-delay: 1s;
+      }
+
+      #cont-loader{
+        margin: 0 auto;
+        padding-top: 20%;
+      }
+
+      #message {
+        animation: blink 4s infinite;
+      }
+
+      @keyframes spinner {
+        from {transform: rotate(0deg)}
+        to {transform: rotate(-360deg)}
+      }
+
+      @keyframes bounce {
+        0% {
+          transform: translateY(0px)
+        }
+        25% {
+          transform: translateY(2px)
+        }
+        50% {
+          transform: translateY(4px)
+        }
+        75% {
+          transform: translateY(2px)
+        }
+        100% {
+          transform: translateY(0px)
+        }
+      }
+
+      @keyframes blink {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+    
+    <paper-card>
+      <div id="cont-loader">
+        <div id="contIcons">
+          <dom-repeat items="[[arrayForRepeater]]" id="repeater">
+            <template>
+              <iron-icon icon="[[dataObject.icon]]" id$="[[dataObject.animation]]"></iron-icon>
+            </template>
+          </dom-repeat>
+        </div>
+        <img src="[[dataObject.imgUrl]]" height="100px" width="100px">
+        <h2 id="message">[[dataObject.message]]</h2>
+      </div>
+    </paper-card>
+  </template>
+
+  <script>
+    /**
+     * `loader-component`
+     * A simple loader component
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class LoaderComponent extends Polymer.Element {
+      static get is() { return 'loader-component'; }
+      static get properties() {
+        return {
+          arrayForRepeater: {
+            type: Array,
+            value: []
+          },
+          dataObject:{
+            type:Object,
+            value: {
+              icon: '',
+              imgUrl: '',
+              message: '',
+              repeat: 0,
+              animation: ''
+            }
+          }
+        };
+      }
+
+      static get observers() {
+        return [
+            '_setIcon(dataObject.icon)'
+        ]
+      }
+
+      _setIcon(icon){
+        if(this.dataObject.repeat === 1){
+          this.$.contIcons.style.marginLeft = "30%";
+          this.arrayForRepeater = Array(this.dataObject.repeat);
+        } else {
+          this.arrayForRepeater = Array(this.dataObject.repeat);
+        }
+      }
+    }
+    window.customElements.define(LoaderComponent.is, LoaderComponent);
+  </script>
+</dom-module>

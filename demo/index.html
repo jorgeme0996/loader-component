@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>loader-component demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../loader-component.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic loader-component demo</h3>
+      <demo-snippet>
+        <template>
+          <loader-component id="case1"></loader-component>
+
+          <loader-component id="case2"></loader-component>
+          <template>
+            ========= CASO 1 ===============================================
+
+            const element = document.getElementById('case1');
+
+            const obj = {
+              icon: 'icons:cached',
+              imgUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/05/BBVA_2019.svg',
+              message: 'Espera por favor',
+              repeat: 1,
+              animation: 'spinner'
+            }
+        
+            element.set('dataObject', obj)
+
+            ========= CASO 2 ===============================================
+
+            const element2 = document.getElementById('case2');
+
+            const obj2 = {
+              icon: 'icons:settings-ethernet',
+              imgUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/69/Polymer_Project_logo.png',
+              message: 'Cargando...',
+              repeat: 2,
+              animation: 'bounce'
+            }
+        
+            element2.set('dataObject', obj2)
+          </template>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+  <script>
+    const element = document.getElementById('case1');
+
+    const obj = {
+      icon: 'icons:cached',
+      imgUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/05/BBVA_2019.svg',
+      message: 'Espera por favor',
+      repeat: 1,
+      animation: 'spinner'
+    }
+
+    element.set('dataObject', obj)
+
+    const element2 = document.getElementById('case2');
+
+    const obj2 = {
+      icon: 'icons:settings-ethernet',
+      imgUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/69/Polymer_Project_logo.png',
+      message: 'Cargando...',
+      repeat: 2,
+      animation: 'bounce'
+    }
+
+    element2.set('dataObject', obj2)
+  </script>
+</html>
