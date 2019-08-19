@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-button/paper-button.html">
 
 <dom-module id="loader-component">
   <template>
@@ -24,6 +25,8 @@
         margin: 0 auto;
         font-family: 'Roboto', sans-serif;
         margin-bottom: 10px;
+        flex-direction: column;
+        padding: 30px;
       }
 
       iron-icon {
@@ -103,6 +106,9 @@
         <img src="[[dataObject.imgUrl]]" height="100px" width="100px">
         <h2 id="message">[[dataObject.message]]</h2>
       </div>
+      <paper-button on-click="fireEvent">
+        Fire Event
+      </paper-button>
     </paper-card>
   </template>
 
@@ -125,30 +131,22 @@
           },
           dataObject:{
             type:Object,
-            value: {
-              icon: '',
-              imgUrl: '',
-              message: '',
-              repeat: 0,
-              animation: ''
-            }
+            observer: '_setIcon'
           }
         };
       }
 
-      static get observers() {
-        return [
-            '_setIcon(dataObject.icon)'
-        ]
-      }
-
       _setIcon(icon){
-        if(this.dataObject.repeat === 1){
+        if(this.dataObject.repeat === 1){ 
           this.$.contIcons.style.marginLeft = "30%";
           this.arrayForRepeater = Array(this.dataObject.repeat);
         } else {
           this.arrayForRepeater = Array(this.dataObject.repeat);
         }
+      }
+
+      fireEvent(){
+        this.dispatchEvent(new CustomEvent('modal-event', {detail: this.dataObject }));
       }
     }
     window.customElements.define(LoaderComponent.is, LoaderComponent);

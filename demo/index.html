@@ -71,6 +71,10 @@
 
     element.set('dataObject', obj)
 
+    element.addEventListener('modal-event', (event)=>{
+      console.log(event);
+    })
+
     const element2 = document.getElementById('case2');
 
     const obj2 = {
